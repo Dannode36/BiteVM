@@ -54,6 +54,9 @@ namespace BiteVM
                     case Instruction.SLPS:
                         Thread.Sleep(stack.Pop() * 1000);
                         break;
+                    case Instruction.GOTO:
+                        i = stack.Pop();
+                        break;
                     default:
                         break;
                 }

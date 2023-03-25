@@ -8,6 +8,8 @@ namespace BiteVM
 {
     internal class Parser
     {
+        public static Dictionary<string, int> gotoMap = new();
+
         public static byte[] Parse(string fileName)
         {
             //Split the string into individual instructions
@@ -18,12 +20,18 @@ namespace BiteVM
 
             for (int i = 0; i < instSet.Length; i++)
             {
-                instSet[i] = (byte)ParseInst(instText[i], i);
+                if (instText[i].StartsWith('$'))
+                {
+                    gotoMap.Add(instText[i], i);
+                    instSet[i] = (byte)Instruction.NOP;
+                    continue;
+                }
+                instSet[i] = ParseInstruction(instText[i], i);
             }
             return instSet;
         }
 
-        public static byte ParseInst(string value, int instNum)
+        public static byte ParseInstruction(string value, int instNum)
         {
             //If its just a literal then return it as a byte else try parse it into an instruction
             //Maybe LITERAL should require a literal preceeding it

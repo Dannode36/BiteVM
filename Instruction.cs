@@ -8,8 +8,8 @@ namespace BiteVM
 {
     internal enum Instruction
     {
-        INT = 0x00, //Pushes an int onto the stack
-        FLT = 0x01, //Pushes a float onto the stack
+        NOP = 0x00, //Pushes an int onto the stack
+        INT = 0x01, //Pushes an int onto the stack
         ADD = 0xA1, //Pops top 2 values from the stack and pushes their sum
         SUB = 0xA2, //Pops top 2 values from the stack and pushes their difference
         MUl = 0xA3, //Pops top 2 values from the stack and pushes their product
@@ -20,5 +20,8 @@ namespace BiteVM
         RDL = 0xE1, //Pushes a readline into the stack
         SLP = 0xF0, //Sleeps for the popped amount of milliseconds
         SLPS = 0xF1, //Sleeps for the popped amount of seconds
+
+        //Functions and Goto
+        GOTO = 0xC0,
     };
 }
